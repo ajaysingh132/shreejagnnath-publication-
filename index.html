@@ -3,63 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jagannath Publishing Pro</title>
+<meta name="description" content="जगन्नाथ पब्लिकेशन, भोपाल का डिजिटल प्रकाशन मंच और पुस्तकालय।">
+<title>जगन्नाथ पब्लिकेशन | डिजिटल पुस्तकालय</title>
 <style>
-body{font-family:sans-serif;margin:0;background:#fff7e6}
-.header{background:#ff8c00;color:#fff;padding:15px;text-align:center;font-size:20px}
-.container{padding:10px}
-.card{background:#fff;padding:10px;margin:10px;border-radius:10px}
-button{padding:10px;margin:5px;border:none;border-radius:6px;background:#ff8c00;color:#fff;width:100%}
-input,textarea,select{width:100%;padding:8px;margin:5px 0}
-table{width:100%;border-collapse:collapse}
-td,th{border:1px solid #ccc;padding:6px;text-align:center}
-.book-link{display:block;background:#17324d;color:#fff;text-decoration:none;padding:16px;border-radius:12px;margin:12px 0;font-weight:bold;line-height:1.6}
-.book-link small{display:block;color:#e7edf2;font-weight:normal}
+body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#fff7e6;color:#24332d}
+.header{background:#183b36;color:#fff;padding:20px 15px;text-align:center;font-size:22px;font-weight:750;border-bottom:4px solid #d7a84b}
+.container{max-width:900px;margin:auto;padding:12px}
+.card{background:#fff;padding:16px;margin:12px 0;border-radius:12px;box-shadow:0 3px 12px #0000000b}
+button{padding:10px;margin:5px 0;border:none;border-radius:7px;background:#d7a84b;color:#172b28;font-weight:700;width:100%;cursor:pointer}
+input,textarea,select{width:100%;padding:10px;margin:5px 0;border:1px solid #d8d2c5;border-radius:7px;box-sizing:border-box;font:inherit}
+table{width:100%;border-collapse:collapse;overflow-wrap:anywhere}td,th{border:1px solid #ddd6c8;padding:7px;text-align:left}
+.library-link{display:block;background:#214a40;color:#fff;text-decoration:none;padding:18px;border-radius:12px;margin:12px 0;font-weight:bold;line-height:1.6}
+.library-link small{display:block;color:#e7eee9;font-weight:normal}
+.note{color:#52665c;font-size:14px;line-height:1.6}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
-<div class="header">📚 Jagannath Publishing Pro</div>
+<div class="header">📚 जगन्नाथ पब्लिकेशन · भोपाल</div>
 <div class="container">
-
-<a class="book-link" href="./bharat-america-democracy-capitalism-sovereignty.html">
-📘 भारत और अमेरिका: लोकतंत्र, पूँजी और संप्रभुता
-<small>अजय सिंह चौहान की प्रस्तावित 400-पृष्ठीय शोध पुस्तक · पुस्तक परियोजना देखें →</small>
-</a>
-
+<a class="library-link" href="./books.html">📖 सभी पुस्तकें — डिजिटल पुस्तकालय खोलें
+<small>अजय सिंह चौहान और हमारी लेखन एवं शोध टीम की पुस्तकें, पुस्तक परियोजनाएँ और उपलब्ध डिजिटल संस्करण →</small></a>
 <div class="card">
-<button onclick="login()">🔐 Login with Google</button>
-<button onclick="logout()">🚪 Logout</button>
+<h2>प्रकाशन मंच</h2>
+<p>जगन्नाथ पब्लिकेशन में पुस्तकों का परिचय, संपादकीय स्थिति और उपलब्ध डिजिटल संस्करण व्यवस्थित किए जा रहे हैं। पुस्तकालय में प्रकाशित पुस्तकों और अभी चल रही परियोजनाओं को अलग-अलग चिह्नित किया जाएगा।</p>
+<p class="note">लेखक/संपर्क: अजय सिंह चौहान · भोपाल, मध्य प्रदेश<br><a href="mailto:lamaans@outlook.in">lamaans@outlook.in</a></p>
 </div>
 <div class="card">
-<input id="title" placeholder="Title">
-<input id="author" placeholder="Author">
+<h3>पुस्तक पांडुलिपि प्रबंधन</h3>
+<p class="note">यह प्रशासनिक डेमो तभी काम करेगा जब Firebase परियोजना की वास्तविक कॉन्फ़िगरेशन और सुरक्षित Firestore नियम लगाए जाएँ। नीचे दिया गया नमूना कॉन्फ़िगरेशन अभी सक्रिय नहीं है।</p>
+<button onclick="login()">🔐 Google से लॉगिन</button>
+<button onclick="logout()">🚪 लॉगआउट</button>
+</div>
+<div class="card">
+<h3>नई पुस्तक का रिकॉर्ड</h3>
+<input id="title" placeholder="पुस्तक का शीर्षक">
+<input id="author" placeholder="लेखक / सहलेखक">
 <select id="status"><option>Draft</option><option>Ready</option><option>Published</option></select>
-<textarea id="description" placeholder="Description"></textarea>
-<textarea id="editor" placeholder="Content"></textarea>
-<button onclick="runAI()">🤖 AI Generate</button>
-<button onclick="saveBook()">💾 Save Book</button>
-<button onclick="copyKDP()">📤 Copy KDP</button>
+<textarea id="description" placeholder="पुस्तक का परिचय"></textarea>
+<textarea id="editor" placeholder="पांडुलिपि सामग्री"></textarea>
+<button onclick="runAI()">शीर्षक और प्रारंभिक पाठ तैयार करें</button>
+<button onclick="saveBook()">पुस्तक रिकॉर्ड सहेजें</button>
+<button onclick="copyKDP()">प्रकाशन विवरण कॉपी करें</button>
 </div>
 <div class="card">
-<table><thead><tr><th>Title</th><th>Status</th><th>Action</th></tr></thead><tbody id="table"></tbody></table>
+<h3>पांडुलिपि रिकॉर्ड</h3>
+<table><thead><tr><th>शीर्षक</th><th>स्थिति</th><th>कार्य</th></tr></thead><tbody id="table"></tbody></table>
 </div>
 </div>
 <script>
-const firebaseConfig = {apiKey:"YOUR_KEY",authDomain:"YOUR_DOMAIN",projectId:"YOUR_PROJECT_ID"};
-firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth();const db=firebase.firestore();let books=[];
-function login(){const provider=new firebase.auth.GoogleAuthProvider();auth.signInWithPopup(provider);}
-function logout(){auth.signOut();}
-async function saveBook(){await db.collection("books").add({title:title.value,author:author.value,status:status.value,description:description.value,content:editor.value,created:Date.now()});}
-function loadBooks(){db.collection("books").onSnapshot(snap=>{books=[];snap.forEach(doc=>books.push({...doc.data(),id:doc.id}));render();});}
-function render(){let html="";books.forEach(b=>{html+=`<tr><td>${b.title}</td><td>${b.status}</td><td><button onclick="del('${b.id}')">Delete</button></td></tr>`;});table.innerHTML=html;}
-function del(id){db.collection("books").doc(id).delete();}
-function runAI(){let d=description.value;title.value=d.split(" ").slice(0,5).join(" ");editor.value="📘 "+title.value+"\n\n"+d;}
-function copyKDP(){let txt=`Title: ${title.value}\nAuthor: ${author.value}\n\nDescription:\n${description.value}\n\nContent:\n${editor.value}`;navigator.clipboard.writeText(txt);alert("Copied for KDP");}
-auth.onAuthStateChanged(user=>{if(user){loadBooks();}});
+const firebaseConfig={apiKey:"YOUR_KEY",authDomain:"YOUR_DOMAIN",projectId:"YOUR_PROJECT_ID"};
+let auth=null,db=null,books=[];
+try{if(firebase&&firebaseConfig.apiKey!=="YOUR_KEY"){firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();}}catch(e){console.warn("Firebase configuration is not active yet.");}
+function login(){if(!auth){alert("Firebase की वास्तविक कॉन्फ़िगरेशन अभी जोड़ी नहीं गई है।");return;}const provider=new firebase.auth.GoogleAuthProvider();auth.signInWithPopup(provider);}
+function logout(){if(auth)auth.signOut();else alert("लॉगिन प्रणाली अभी सक्रिय नहीं है।");}
+async function saveBook(){if(!db){alert("रिकॉर्ड सहेजने के लिए पहले Firebase कॉन्फ़िगरेशन और सुरक्षित नियम जोड़ने होंगे।");return;}try{await db.collection("books").add({title:document.getElementById("title").value,author:document.getElementById("author").value,status:document.getElementById("status").value,description:document.getElementById("description").value,content:document.getElementById("editor").value,created:Date.now()});}catch(e){alert("रिकॉर्ड सहेजा नहीं जा सका। Firebase नियम और लॉगिन जाँचें।");}}
+function loadBooks(){if(!db)return;db.collection("books").onSnapshot(snap=>{books=[];snap.forEach(doc=>books.push({...doc.data(),id:doc.id}));render();});}
+function render(){const tbody=document.getElementById("table");tbody.replaceChildren();books.forEach(b=>{const tr=document.createElement("tr");[b.title,b.status].forEach(v=>{const td=document.createElement("td");td.textContent=v||"";tr.appendChild(td);});const td=document.createElement("td");const btn=document.createElement("button");btn.textContent="Delete";btn.onclick=()=>del(b.id);td.appendChild(btn);tr.appendChild(td);tbody.appendChild(tr);});}
+async function del(id){if(db&&confirm("क्या यह रिकॉर्ड हटाना है?"))await db.collection("books").doc(id).delete();}
+function runAI(){const d=document.getElementById("description").value;document.getElementById("title").value=d.split(/\s+/).slice(0,5).join(" ");document.getElementById("editor").value="📘 "+document.getElementById("title").value+"\n\n"+d;}
+function copyKDP(){const txt="Title: "+document.getElementById("title").value+"\nAuthor: "+document.getElementById("author").value+"\n\nDescription:\n"+document.getElementById("description").value+"\n\nContent:\n"+document.getElementById("editor").value;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>alert("प्रकाशन विवरण कॉपी हुआ।")).catch(()=>alert(txt));else alert(txt);}
+if(auth)auth.onAuthStateChanged(user=>{if(user)loadBooks();});
 </script>
 </body>
 </html>
